@@ -37,7 +37,7 @@ unset DEST
 
 - If you want an xdg-desktop entry, edit the template provided in the repository and install to the system.
 ```
-# This is an example for Fitbit. Replace it with whatever is needed for your app.
+# These are just example vairables for a Fitbit launcher. Replace it with whatever is needed for your app.
 export \
   WINTITLE="Fitbit" \
   TITLE="fitbit" \
