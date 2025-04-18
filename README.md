@@ -35,7 +35,7 @@ sudo chmod -v +x "${DEST}/aal"
 unset DEST
 ```
 
-- If you want an xdg-desktop entry, edit the template provided in the repository and install to the system.
+- If you want an xdg-desktop entry, run these commands.
 ```
 # These are just example variables for a Fitbit launcher. Replace it with whatever is needed for your app.
 export \
