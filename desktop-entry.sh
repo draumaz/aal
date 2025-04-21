@@ -14,7 +14,10 @@ case "${1}" in --current-app|-ca|--current-app-continue|-cac)
     head -1)
   echo "APP_ID: ${APP_ID}"
   case "${1}" in 
-    --current-app-continue|-cac) export APP_ID ;;
+    --current-app-continue|-cac)
+      export APP_ID
+      export TITLE="$(echo ${APP_ID} | tr '.' '\n' | tail -1)"
+    ;;
     *) exit 0 ;;
   esac
 esac
@@ -31,11 +34,10 @@ case "${DEVICE_PIN}" in "")
 case "${COMMENT}" in "")
   read -p 'COMMENT (xdg-desktop comment): ' COMMENT
 ;; esac
-case "${ME}" in "")
-  read -p 'ME (your name): ' ME
-;; esac
-  
-cat >> "${ME}-${TITLE}.desktop" << EOF
+
+ENTRY="${USER}-${TITLE}.desktop"
+
+cat >> "${ENTRY}" << EOF
 [Desktop Entry]
 Type=Application
 Name=${TITLE}
@@ -46,10 +48,10 @@ Terminal=False
 Categories=Utilities
 StartupNotify=false
 EOF
-cat "${ME}-${TITLE}.desktop"
+cat "${ENTRY}"
 
 set -x
-xdg-desktop-menu install "${ME}-${TITLE}.desktop"
+xdg-desktop-menu install "${ENTRY}"
 set +x
 
-rm -f "${ME}-${TITLE}.desktop"
+rm -f "${ENTRY}"
