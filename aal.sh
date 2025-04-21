@@ -46,7 +46,7 @@ case "${LOCK_STATE}" in
     "
 ;; esac
 
-case "${WINTITLE}" in "") WIN_TITLE="${APP_ID}" ;; esac
+case "${TITLE}" in "") TITLE="${APP_ID}" ;; esac
 
 echo "[$0] running scrcpy, opening ${APP_ID}"
 
@@ -54,7 +54,7 @@ scrcpy \
   --always-on-top \
   --no-audio \
   --turn-screen-off \
-  --window-title="${WINTITLE}" \
+  --window-title="${TITLE}" \
   --start-app="${APP_ID}" \
     > /dev/null 2>&1
 
