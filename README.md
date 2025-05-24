@@ -26,12 +26,15 @@
 # Install
 
 - aal is just a shell script; make it an executable and put it somewhere in your path.
-```
-export DEST="/wherever/you/want"
-{ echo $PATH | grep "${DEST}" > /dev/null 2>&1 && echo "Good to go!"; } \
-  || echo "Not that one."
 
-sudo curl -fL https://raw.githubusercontent.com/draumaz/aal/refs/heads/main/aal.sh > "${DEST}/aal"
-sudo chmod -v +x "${DEST}/aal"
-unset DEST
-```
+# Variable description
+
+## Required
+- ```APP_ID```: package name of app, e.g. "com.fitbit.FitbitMobile"
+  - If you don't know the package name, open it on your device and run the following command.
+  - ```adb shell dumpsys activity activities | grep ResumedActivity | awk '{print $4}' | tail -1 | sed 's|/|\n|g' | head -1```
+  
+## Optional
+- ```DEVICE_IP```: autoconnect to your device, e.g. "192.168.0.250:62112"
+- ```DEVICE_PIN```: automatically unlock your device with digit PIN, e.g. "1959"
+- ```TITLE```: window title, e.g. "Fitbit" (does not have to match APP_ID)
