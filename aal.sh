@@ -1,6 +1,19 @@
 #/bin/bash -e
 # Android app launcher, a scrcpy wrapper
 
+case "$(adb devices | sed 1d)" in
+  "")
+    case "${DEVICE_IP}" in
+      *":"*)
+        adb connect "${DEVICE_IP}"
+      ;;
+      "")
+        echo "[$0] no device connected or IP provided, exiting"
+        exit 1
+      ;;
+    esac
+esac
+
 LOCK_STATE=$(
   adb shell dumpsys window | \
     sed 's/ /\n/g' | \

@@ -34,32 +34,3 @@ sudo curl -fL https://raw.githubusercontent.com/draumaz/aal/refs/heads/main/aal.
 sudo chmod -v +x "${DEST}/aal"
 unset DEST
 ```
-
-- If you want an xdg-desktop entry, run these commands.
-```
-# These are just example variables for a Fitbit launcher. Replace it with whatever is needed for your app.
-export \
-  WINTITLE="Fitbit" \
-  TITLE="fitbit" \
-  APP_ID="com.fitbit.FitbitMobile" \
-  COMMENT="Fitbit (scrcpy wrapper, via aal)" \
-  DEVICE_PIN="1234" # could you imagine? \
-  ME="draumaz"
-
-cat >> "${ME}-${TITLE}.desktop" << EOF
-[Desktop Entry]
-Type=Application
-Name=${WINTITLE}
-Comment=${COMMENT}
-Exec=bash -c 'APP_ID="${APP_ID}" TITLE="${WINTITLE}" WINTITLE="${WINTITLE}" DEVICE_PIN="${DEVICE_PIN}" aal'
-Icon=scrcpy
-Terminal=False
-Categories=Utilities
-StartupNotify=false
-EOF
-
-xdg-desktop-menu install "${ME}-${TITLE}.desktop"
-rm -fv "${ME}-${TITLE}.desktop"
-
-unset WINTITLE TITLE APP_ID COMMENT DEVICE_PIN ME
-```
