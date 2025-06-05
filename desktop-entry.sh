@@ -30,6 +30,7 @@ case "${DEVICE_PIN}" in "")
 ;; esac
 case "${DEVICE_IP}" in "")
   read -p '[optional] DEVICE_IP (local ip of device with port suffix): ' DEVICE_IP 
+;; esac
 case "${TITLE}" in "")
   read -p '[optional] TITLE (window title string): ' TITLE
 ;; esac
