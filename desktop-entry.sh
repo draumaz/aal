@@ -22,17 +22,19 @@ case "${1}" in --current-app|-ca|--current-app-continue|-cac)
   esac
 esac
 
-case "${TITLE}" in "")
-  read -p 'TITLE (display name of app): ' TITLE
-;; esac
 case "${APP_ID}" in "")
   read -p 'APP_ID (full package ID of app): ' APP_ID
 ;; esac
 case "${DEVICE_PIN}" in "")
-  read -p 'DEVICE_PIN (the code you unlock your phone with): ' DEVICE_PIN
+  read -p '[optional] DEVICE_PIN (the code you unlock your phone with): ' DEVICE_PIN
+;; esac
+case "${DEVICE_IP}" in "")
+  read -p '[optional] DEVICE_IP (local ip of device with port suffix): ' DEVICE_IP 
+case "${TITLE}" in "")
+  read -p '[optional] TITLE (window title string): ' TITLE
 ;; esac
 case "${COMMENT}" in "")
-  read -p 'COMMENT (xdg-desktop comment): ' COMMENT
+  read -p '[optional] COMMENT (xdg-desktop comment): ' COMMENT
 ;; esac
 
 ENTRY="${USER}-${TITLE}.desktop"
@@ -42,7 +44,7 @@ cat >> "${ENTRY}" << EOF
 Type=Application
 Name=${TITLE}
 Comment=${COMMENT}
-Exec=bash -c 'APP_ID="${APP_ID}" TITLE="${TITLE}" DEVICE_PIN="${DEVICE_PIN}" aal'
+Exec=bash -c 'APP_ID="${APP_ID}" TITLE="${TITLE}" DEVICE_PIN="${DEVICE_PIN}" DEVICE_IP="${DEVICE_IP}" aal'
 Icon=scrcpy
 Terminal=False
 Categories=Utilities
@@ -50,8 +52,7 @@ StartupNotify=false
 EOF
 cat "${ENTRY}"
 
-set -x
+echo "installing ${ENTRY}"
 xdg-desktop-menu install "${ENTRY}"
-set +x
 
 rm -f "${ENTRY}"
