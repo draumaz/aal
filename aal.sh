@@ -51,11 +51,12 @@ case "${LOCK_STATE}" in
 
     adb shell " 
       # Wake device from sleep
-      input keyevent 26 && sleep 0.35
+      input keyevent 26 && sleep 0.25
       # Simulate swipe up to get to pinpad
-      input swipe 500 1500 500 500 && sleep 0.1
-      # Type pincode to unlock device
-      input text ${DEVICE_PIN}
+      input swipe 500 1500 500 500 && sleep 0.25
+      # Type pincode and press enter to unlock device
+      input text ${DEVICE_PIN} && sleep 0.25
+      input keyevent 66
     "
 ;; esac
 
